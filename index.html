@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ShineHome – Toilet & Home Cleaning Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --accent: #22c55e;
+      --bg: #f4f7fb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout helpers */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 250, 252, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      gap: 1rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #a5f3fc, #0d9488);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #ecfeff;
+      font-weight: 700;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 1rem;
+    }
+
+    .brand span:last-child {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark);
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ecfeff;
+      box-shadow: 0 14px 25px rgba(13, 148, 136, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 35px rgba(13, 148, 136, 0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      background: #ecfeff;
+    }
+
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-cta {
+        display: none;
+      }
+      .nav-toggle {
+        display: block;
+      }
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.25rem 0 0.75rem;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      padding: 0.4rem 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .mobile-menu .btn {
+      width: 100%;
+      margin-top: 0.25rem;
+    }
+
+    /* Hero section */
+    .hero {
+      padding: 3.5rem 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      background: #ecfeff;
+      border: 1px solid #a5f3fc;
+      color: var(--primary-dark);
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-kicker span:last-child {
+      font-size: 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title span.highlight {
+      color: var(--primary-dark);
+      position: relative;
+    }
+
+    .hero-title span.highlight::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0.05rem;
+      width: 100%;
+      height: 0.3rem;
+      background: rgba(45, 212, 191, 0.35);
+      z-index: -1;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 32rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hero-note span.badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #bbf7d0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .hero-stat {
+      min-width: 110px;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1.1rem;
+    }
+
+    .hero-stat span {
+      font-size: 0.77rem;
+      color: var(--muted);
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at 10% 0, #cffafe, #0f172a);
+      border-radius: 1.5rem;
+      padding: 1.4rem 1.3rem;
+      color: #e5f6ff;
+      box-shadow: 0 24px 50px rgba(15, 23, 42, 0.55);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .hero-card-chip {
+      font-size: 0.75rem;
+      padding: 0.22rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .hero-card-main {
+      display: flex;
+      gap: 1.3rem;
+      align-items: center;
+    }
+
+    .hero-bottle {
+      width: 88px;
+      height: 150px;
+      border-radius: 2.3rem 2.3rem 0.8rem 0.8rem;
+      background: linear-gradient(160deg, #ecfeff, #a5f3fc, #22c55e);
+      position: relative;
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.7);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-bottle::before {
+      content: "";
+      position: absolute;
+      top: -18px;
+      left: 22px;
+      width: 44px;
+      height: 18px;
+      background: #0f172a;
+      border-radius: 999px 999px 0.3rem 0.3rem;
+    }
+
+    .hero-bottle label {
+      background: rgba(15, 23, 42, 0.4);
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-metrics {
+      flex: 1;
+      font-size: 0.8rem;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+
+    .metric-label {
+      color: #bae6fd;
+    }
+
+    .metric-value {
+      font-weight: 600;
+    }
+
+    .metric-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.45);
+      margin-top: 0.4rem;
+    }
+
+    .hero-floating {
+      position: absolute;
+      right: -10px;
+      bottom: -18px;
+      width: 160px;
+      background: #f9fafb;
+      border-radius: 1.1rem;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.75rem;
+      color: var(--text);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.35);
+    }
+
+    .hero-floating strong {
+      font-size: 0.8rem;
+    }
+
+    .hero-floating span {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .hero-floating small {
+      font-size: 0.68rem;
+      color: var(--primary-dark);
+    }
+
+    /* Section base */
+    section {
+      padding: 3rem 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-kicker {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      max-width: 32rem;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Features section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    @media (max-width: 960px) {
+      .features-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+      background: #ecfeff;
+    }
+
+    .feature-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Product section */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.2rem;
+    }
+
+    @media (max-width: 960px) {
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    .product-image {
+      height: 150px;
+      border-radius: 0.9rem;
+      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ecfeff;
+      font-size: 2.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .product-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .product-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+    }
+
+    .product-price {
+      font-weight: 700;
+    }
+
+    .product-tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: #ecfeff;
+      color: var(--primary-dark);
+    }
+
+    .product-actions {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .btn-xs {
+      padding: 0.35rem 0.7rem;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-xs:hover {
+      border-color: var(--primary);
+      background: #ecfeff;
+      color: var(--primary-dark);
+    }
+
+    /* How it works */
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      .how-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .steps-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #ecfeff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .step-body h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .step-body p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .how-card {
+      background: var(--card-bg);
+      border-radius: 1.1rem;
+      padding: 1.1rem 1rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.06);
+      font-size: 0.8rem;
+    }
+
+    .how-card-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.45rem;
+    }
+
+    .how-label {
+      color: var(--muted);
+    }
+
+    .how-value {
+      font-weight: 600;
+    }
+
+    .how-card strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .how-card small {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Testimonials & trust bar */
+    .trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--muted);
+    }
+
+    .trust-bar span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .trust-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+
+    @media (max-width: 960px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .testimonial-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+
+    .testimonial-stars {
+      color: #f59e0b;
+      margin-bottom: 0.3rem;
+      font-size: 0.75rem;
+    }
+
+    .testimonial-text {
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .testimonial-author {
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .testimonial-role {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* Pricing / B2B */
+    .pricing-wrapper {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1.7rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 960px) {
+      .pricing-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pricing-card {
+      background: var(--card-bg);
+      border-radius: 1.2rem;
+      padding: 1.4rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+    }
+
+    .pricing-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .pricing-row {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+
+    .pricing-tag {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: #ecfeff;
+      color: var(--primary-dark);
+    }
+
+    .price-main {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .price-main span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-left: 0.25rem;
+    }
+
+    .pricing-list {
+      margin: 0.8rem 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .pricing-list li {
+      margin-bottom: 0.3rem;
+    }
+
+    .pricing-list li::marker {
+      color: var(--primary);
+    }
+
+    .pricing-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    .b2b-card {
+      background: #0f172a;
+      border-radius: 1.2rem;
+      color: #e5e7eb;
+      padding: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .b2b-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 10% 0, rgba(52, 211, 153, 0.35), transparent),
+        radial-gradient(circle at 90% 100%, rgba(34, 211, 238, 0.35), transparent);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .b2b-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .b2b-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .b2b-card p {
+      font-size: 0.8rem;
+      color: #cbd5f5;
+      margin-bottom: 0.7rem;
+    }
+
+    .b2b-bullets {
+      font-size: 0.78rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .b2b-bullets li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* FAQ */
+    .faq-grid {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      padding: 0.7rem 0.9rem;
+      cursor: pointer;
+      font-size: 0.82rem;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-question span {
+      font-weight: 500;
+    }
+
+    .faq-toggle {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .faq-answer {
+      margin-top: 0.4rem;
+      color: var(--muted);
+      display: none;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* Contact / CTA */
+    .contact-section {
+      padding-bottom: 3.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 1.7rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 960px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-copy {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .contact-copy strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-highlight {
+      margin-top: 0.8rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 0.8rem;
+      background: #ecfeff;
+      border: 1px dashed #a5f3fc;
+      font-size: 0.78rem;
+      color: var(--primary-dark);
+    }
+
+    .contact-form {
+      background: var(--card-bg);
+      border-radius: 1.1rem;
+      padding: 1.2rem 1.1rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+      font-size: 0.85rem;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 0.6rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .form-group label {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      border-radius: 0.6rem;
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.6rem;
+      font-size: 0.82rem;
+      outline: none;
+      background: #f9fafb;
+    }
+
+    .form-group textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.25);
+      background: #ffffff;
+    }
+
+    .form-footer {
+      margin-top: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .form-note {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .form-status {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      min-height: 1em;
+    }
+
+    .form-status.success {
+      color: var(--accent);
+    }
+
+    .form-status.error {
+      color: var(--danger);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.2rem 0 1.6rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: #f8fafc;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER / NAVBAR -->
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="nav-left">
+          <div class="logo-circle">S</div>
+          <div class="brand">
+            <span>ShineHome</span>
+            <span>Toilet & home care</span>
+          </div>
+        </div>
+
+        <div class="nav-links">
+          <a href="#products">Products</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="#pricing">Bulk / B2B</a>
+        </div>
+
+        <div class="nav-cta">
+          <button class="btn btn-outline" onclick="scrollToSection('contact')">
+            Contact sales
+          </button>
+          <button class="btn btn-primary" onclick="scrollToSection('products')">
+            Shop now
+          </button>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          ☰
+        </button>
+      </nav>
+
+      <!-- Mobile menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#products" onclick="closeMobile()">Products</a>
+        <a href="#how-it-works" onclick="closeMobile()">How it works</a>
+        <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+        <a href="#pricing" onclick="closeMobile()">Bulk / B2B</a>
+        <button class="btn btn-outline" onclick="scrollToSection('contact')">
+          Contact sales
+        </button>
+        <button class="btn btn-primary" onclick="scrollToSection('products')">
+          Shop now
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-kicker">
+            <span>99.9% germ protection</span>
+            <span>🧼</span>
+          </div>
+          <h1 class="hero-title">
+            Make every
+            <span class="highlight">washroom</span>
+            feel freshly cleaned — in minutes.
+          </h1>
+          <p class="hero-subtitle">
+            ShineHome toilet cleaning solutions are designed for flats, villas
+            and housing societies. Deep cleaning power, zero harsh smell, and
+            surfaces that shine longer.
+          </p>
+
+          <div class="hero-cta-row">
+            <button class="btn btn-primary" onclick="scrollToSection('products')">
+              Explore cleaning range
+            </button>
+            <button class="btn btn-outline" onclick="scrollToSection('how-it-works')">
+              See how it works
+            </button>
+          </div>
+
+          <div class="hero-note">
+            <span class="badge">★</span>
+            <span>Trusted by 12K+ homes & 250+ housing societies</span>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong>99.9%</strong>
+              <span>Germ kill tested in lab</span>
+            </div>
+            <div class="hero-stat">
+              <strong>3x faster</strong>
+              <span>Stain removal on ceramic</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Up to 7 days</strong>
+              <span>Fresh fragrance lock</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div>
+                <div class="hero-card-title">Toilet Deep Clean Gel</div>
+                <small style="color:#bae6fd;">Citrus + Aqua Shield formula</small>
+              </div>
+              <div class="hero-card-chip">3X stain lift</div>
+            </div>
+
+            <div class="hero-card-main">
+              <div class="hero-bottle">
+                <label>700 ml</label>
+              </div>
+              <div class="hero-metrics">
+                <div class="metric-row">
+                  <span class="metric-label">Germ kill</span>
+                  <span class="metric-value">99.9%</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-label">Contact time</span>
+                  <span class="metric-value">7 min</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-label">Safe on ceramic</span>
+                  <span class="metric-value">Yes ✅</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-label">Fragrance</span>
+                  <span class="metric-value">Aqua Citrus</span>
+                </div>
+                <div class="metric-pill">
+                  <span>🛡</span> Anti-scale shield for hard water
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-floating">
+            <strong>Housing society packs</strong>
+            <span>Custom monthly combos for 10–200 flats. Includes washrooms, common areas & lobby cleaning liquids.</span>
+            <small>Talk to our team for bulk pricing & delivery schedules.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section>
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">Why ShineHome</div>
+          <h2 class="section-title">Made for real homes & busy schedules</h2>
+          <p class="section-subtitle">
+            We design every product for quick daily use in modern Indian
+            washrooms, without compromising on hygiene or safety.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🧪</div>
+            <h3>Lab-tested protection</h3>
+            <p>
+              Kills 99.9% of disease-causing germs when used as directed —
+              independently tested on common bathroom bacteria.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🚽</div>
+            <h3>Safe on surfaces</h3>
+            <p>
+              Gentle on ceramic, tiles and steel fittings while still cutting
+              through stains, rust and scale build-up.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🌿</div>
+            <h3>Low harsh smell</h3>
+            <p>
+              Smart fragrance blend that keeps odour in control without the
+              strong bleach-like fumes.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⏱️</div>
+            <h3>Fast application</h3>
+            <p>
+              Thick gel formula clings to bowl walls — just apply, leave for a
+              few minutes and flush.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🏠</div>
+            <h3>Housing friendly</h3>
+            <p>
+              Available in monthly bundles tailored for 2BHK, 3BHK, villas and
+              large housing societies.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h3>Scheduled delivery</h3>
+            <p>
+              Never run out — set a simple refill schedule for your building or
+              individual home.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">Product range</div>
+          <h2 class="section-title">Toilet & bathroom essentials</h2>
+          <p class="section-subtitle">
+            Start with our core toilet cleaners or add supporting products for
+            complete bathroom hygiene.
+          </p>
+        </div>
+
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">🚽</div>
+            <div class="product-title">Toilet Deep Clean Gel</div>
+            <div class="product-desc">
+              Thick gel with anti-scale action for toilets in hard-water areas.
+              Ideal for daily or alternate-day cleaning.
+            </div>
+            <div class="product-meta">
+              <span class="product-price">₹149</span>
+              <span class="product-tag">700 ml · Citrus Aqua</span>
+            </div>
+            <div class="product-actions">
+              <button class="btn-xs" onclick="scrollToSection('contact')">
+                Bulk enquiry
+              </button>
+              <button class="btn-xs">
+                View usage guide
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">🧴</div>
+            <div class="product-title">Bathroom Surface Cleaner</div>
+            <div class="product-desc">
+              Multi-surface liquid for tiles, floor and fittings. Cuts soap
+              scum and water marks with a fresh ocean fragrance.
+            </div>
+            <div class="product-meta">
+              <span class="product-price">₹189</span>
+              <span class="product-tag">1 L · Ocean Breeze</span>
+            </div>
+            <div class="product-actions">
+              <button class="btn-xs" onclick="scrollToSection('contact')">
+                Housing pack 12x
+              </button>
+              <button class="btn-xs">
+                Safety info
+              </button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">🧼</div>
+            <div class="product-title">Disinfectant Floor Liquid</div>
+            <div class="product-desc">
+              Concentrated disinfectant for bathroom floors and common areas.
+              Works with most mops and machines.
+            </div>
+            <div class="product-meta">
+              <span class="product-price">₹219</span>
+              <span class="product-tag">1 L · Lemon Fresh</span>
+            </div>
+            <div class="product-actions">
+              <button class="btn-xs" onclick="scrollToSection('contact')">
+                Society combo
+              </button>
+              <button class="btn-xs">
+                Dilution chart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">How it works</div>
+          <h2 class="section-title">3 simple steps to a clean toilet</h2>
+          <p class="section-subtitle">
+            Designed so that anyone in the house — or your housekeeping team —
+            can maintain spotless washrooms quickly.
+          </p>
+        </div>
+
+        <div class="how-grid">
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-body">
+                <h3>Apply under rim & bowl walls</h3>
+                <p>
+                  Squeeze the gel all around the rim and let it flow down the
+                  sides. The thick texture helps it stick to stains.
+                </p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-body">
+                <h3>Wait for 5–10 minutes</h3>
+                <p>
+                  Let the formula dissolve stains, germs and odour. Light
+                  brushing may be needed for old, tough marks.
+                </p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-body">
+                <h3>Brush & flush clean</h3>
+                <p>
+                  Brush gently, focusing on waterline and under rim, and flush.
+                  You’re left with a clean bowl and lasting fragrance.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="how-card">
+            <strong>Recommended cleaning schedule</strong>
+
+            <div class="how-card-row">
+              <span class="how-label">Family flat (3–4 people)</span>
+              <span class="how-value">Daily / alt days</span>
+            </div>
+            <div class="how-card-row">
+              <span class="how-label">Guest bathroom</span>
+              <span class="how-value">2–3x per week</span>
+            </div>
+            <div class="how-card-row">
+              <span class="how-label">Housing societies</span>
+              <span class="how-value">Daily (shared areas)</span>
+            </div>
+            <div class="how-card-row">
+              <span class="how-label">Avg. usage</span>
+              <span class="how-value">1 bottle ≈ 1 month</span>
+            </div>
+
+            <small>
+              Always keep away from children, avoid direct contact with eyes or
+              skin, and use in well-ventilated areas. Do not mix with acids or
+              other cleaners.
+            </small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="trust-bar">
+          <span><span class="trust-dot"></span> 4.8/5 average rating</span>
+          <span>•</span>
+          <span>Used in over 250+ housing societies</span>
+          <span>•</span>
+          <span>Fast delivery in major cities</span>
+        </div>
+
+        <div class="section-heading">
+          <div class="section-kicker">Happy customers</div>
+          <h2 class="section-title">What homes & societies say</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-text">
+              “Earlier the washrooms had a strong chemical smell after
+              cleaning. With ShineHome it feels fresh, not suffocating, and the
+              bowl stays clean longer.”
+            </div>
+            <div class="testimonial-author">Nidhi Sharma</div>
+            <div class="testimonial-role">2BHK, Gated Society</div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-text">
+              “Our housekeeping staff finds it easy to use, and the anti-scale
+              effect has reduced yellow water marks in tanks and bowls.”
+            </div>
+            <div class="testimonial-author">Mr. Verma</div>
+            <div class="testimonial-role">Maintenance Head, Housing Society</div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★☆</div>
+            <div class="testimonial-text">
+              “Delivery is reliable and the monthly packs work out cheaper than
+              buying single bottles from local stores.”
+            </div>
+            <div class="testimonial-author">Mahesh Patel</div>
+            <div class="testimonial-role">Society Treasurer</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING / B2B -->
+    <section id="pricing">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">Plans</div>
+          <h2 class="section-title">Perfect for homes or full buildings</h2>
+          <p class="section-subtitle">
+            Start with a single-home starter pack or talk to us for custom
+            society-level supplies.
+          </p>
+        </div>
+
+        <div class="pricing-wrapper">
+          <div class="pricing-card">
+            <h3>Home & Mini Society Starter</h3>
+            <p class="pricing-desc">
+              Ideal for families, PGs and smaller buildings up to 20 washrooms.
+            </p>
+
+            <div class="pricing-row">
+              <div class="price-main">
+                From ₹499
+                <span>/ month (avg.)</span>
+              </div>
+            </div>
+
+            <ul class="pricing-list">
+              <li>3× Toilet Deep Clean Gel (700 ml each)</li>
+              <li>1× Bathroom Surface Cleaner (1 L)</li>
+              <li>1× Disinfectant Floor Liquid (1 L)</li>
+              <li>Delivered once every 30 days</li>
+            </ul>
+
+            <div class="pricing-row">
+              <span class="pricing-tag">Cancel anytime</span>
+              <span class="pricing-tag">Free society demo</span>
+            </div>
+
+            <button class="btn btn-primary" onclick="scrollToSection('contact')">
+              Get custom quote
+            </button>
+            <div class="pricing-note">
+              Prices may vary based on city, quantity and delivery frequency.
+            </div>
+          </div>
+
+          <div class="b2b-card">
+            <div class="b2b-inner">
+              <h3>Housing Society & Facility Management</h3>
+              <p>
+                Designed for large residential complexes, offices and managed
+                properties needing a reliable supply partner.
+              </p>
+
+              <ul class="b2b-bullets">
+                <li>Bulk drum and carton options</li>
+                <li>GST invoicing & payment support</li>
+                <li>Scheduled deliveries & buffer stock</li>
+                <li>On-site product usage training if needed</li>
+              </ul>
+
+              <button class="btn btn-outline" onclick="scrollToSection('contact')">
+                Talk to our B2B team
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">FAQ</div>
+          <h2 class="section-title">Questions about toilet cleaning</h2>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Is ShineHome safe for septic tanks?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              Yes, when used as recommended, ShineHome toilet cleaner is safe
+              for most standard septic systems. Do not overuse or mix with
+              other chemicals in the same bowl.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Can I use it on coloured or designer toilets?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              It is safe on most ceramic surfaces. For coloured or decorative
+              finishes, test on a small area first and avoid leaving for more
+              than 10 minutes.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How is it different from ordinary phenyl?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              Phenyl is mainly for floors and general disinfection. ShineHome
+              toilet gel is formulated specifically for toilet bowls, with
+              strong descaling and germ-kill action that clings to vertical
+              surfaces.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Do you offer free samples for housing societies?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              In select cities, yes. Share your society details through the
+              form below and our team will check sample eligibility for your
+              location.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / LEAD FORM -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">Contact us</div>
+          <h2 class="section-title">Get pricing or free sample info</h2>
+        </div>
+
+        <div class="contact-grid">
+          <div>
+            <div class="contact-copy">
+              <strong>Tell us about your home or housing society</strong>
+              Share a few basic details and our team will help you choose the
+              right toilet cleaning pack and frequency.
+              <div class="contact-highlight">
+                For large housing societies, we can plan monthly consumption,
+                stock buffer, and delivery schedules that match your cleaning
+                routines.
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <form id="leadForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">Full name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="e.g. Rohan Mehta"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone / WhatsApp</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="10-digit number"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email (optional)</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="name@example.com"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="e.g. Jaipur"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="type">Type</label>
+                  <select id="type" name="type">
+                    <option value="home">Single home / flat</option>
+                    <option value="pg">PG / hostel</option>
+                    <option value="society">Housing society</option>
+                    <option value="facility">Facility management / office</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="washrooms">No. of washrooms (approx.)</label>
+                  <input
+                    type="number"
+                    id="washrooms"
+                    name="washrooms"
+                    min="1"
+                    placeholder="e.g. 4, 20, 60"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top:0.5rem;">
+                <label for="message">Anything specific you need?</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tell us about your cleaning needs, preferred brands or current issues…"
+                ></textarea>
+              </div>
+
+              <div class="form-footer">
+                <div class="form-note">
+                  By submitting, you agree to be contacted by our team over
+                  call, SMS or WhatsApp.
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Request callback
+                </button>
+              </div>
+
+              <div id="formStatus" class="form-status"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        © <span id="year"></span> ShineHome Hygiene (Sample brand). All rights
+        reserved.
+      </div>
+      <div class="footer-links">
+        <a href="#hero">Back to top</a>
+        <a href="#products">Products</a>
+        <a href="#pricing">Bulk & B2B</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll helper
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        window.scrollTo({
+          top: el.offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    }
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById("navToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    navToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+
+    function closeMobile() {
+      mobileMenu.classList.remove("open");
+    }
+
+    // FAQ accordion
+    document.querySelectorAll(".faq-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        item.classList.toggle("open");
+        const toggle = item.querySelector(".faq-toggle");
+        toggle.textContent = item.classList.contains("open") ? "−" : "+";
+      });
+    });
+
+    // Dummy form handler (just front-end)
+    const leadForm = document.getElementById("leadForm");
+    const formStatus = document.getElementById("formStatus");
+
+    leadForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = leadForm.name.value.trim();
+      const phone = leadForm.phone.value.trim();
+      const city = leadForm.city.value.trim();
+
+      if (!name || !phone || !city) {
+        formStatus.textContent = "Please fill all required fields.";
+        formStatus.className = "form-status error";
+        return;
+      }
+
+      // Fake success state (no backend)
+      formStatus.textContent =
+        "Thank you! Our team will contact you soon with details.";
+      formStatus.className = "form-status success";
+
+      // Optional: clear form
+      leadForm.reset();
+    });
+
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
